@@ -31,7 +31,7 @@ WORKDIR /home/app/function/
 COPY function/requirements.txt	.
 
 RUN pip3 install -r requirements.txt --extra-index-url=https://www.piwheels.org/simple --target=/home/app/python
-RUN apt install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev ffmpeg  -y
+RUN apt install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev ffmpeg libportaudio2  -y
 RUN apt install libtiff5 libopenjp2-7 libxcb1 -y
 WORKDIR /home/app/
 
