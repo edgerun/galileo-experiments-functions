@@ -1,5 +1,3 @@
-import base64
-import json
 import time
 
 from tflite_runtime.interpreter import Interpreter
@@ -15,7 +13,7 @@ def handle(event, context):
     with open(pathLabels, "r") as f:
         labels = [line.strip() for line in f.readlines()]
 
-    # load model + image
+    # load model
     start_time = time.time()
     try:
         maskInterpreter = Interpreter(model_path=maskModel)
@@ -32,7 +30,7 @@ def handle(event, context):
     stop_time = time.time()
     model_load_time = stop_time - start_time
 
-    # preprocess
+    # preprocess image
     start_time = time.time()
     try:
         nparr = np.frombuffer(event.body, np.uint8)
