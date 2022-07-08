@@ -5,7 +5,7 @@ FROM aicg4t1/of-watchdog:$WATCHDOG_VERSION as watchdog
 FROM aicg4t1/tflite:$TFLITE_VERSION
 
 RUN apt update --allow-releaseinfo-change -y
-RUN apt install libjpeg62 -y
+RUN apt install libjpeg62 cmake -y
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
