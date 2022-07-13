@@ -1,0 +1,6 @@
+FROM arm32v7/python:3.7-slim
+COPY --from=multiarch/qemu-user-static:x86_64-arm /usr/bin/qemu-* /usr/bin
+
+
+RUN apt-get update && apt-get install build-essential libatlas-base-dev -y
+RUN pip install --extra-index-url https://www.piwheels.org/simple https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl

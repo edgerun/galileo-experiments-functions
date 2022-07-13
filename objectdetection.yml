@@ -6,5 +6,7 @@ functions:
   objectdetection:
     lang: opencv
     handler: ./objectdetection
-    image: objectdetection:latest
-
+    image: objectdetection:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s

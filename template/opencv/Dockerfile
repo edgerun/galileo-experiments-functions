@@ -1,7 +1,7 @@
 ARG WATCHDOG_VERSION=1.0.0
 ARG TFLITE_VERSION=2.1.0
 
-FROM aicg4t1/of-watchdog:$WATCHDOG_VERSION as watchdog
+FROM edgerun/of-watchdog:$WATCHDOG_VERSION as watchdog
 FROM aicg4t1/tflite:$TFLITE_VERSION
 
 RUN apt update --allow-releaseinfo-change -y
