@@ -4,7 +4,7 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   taxidriversafetyapp:
-    lang: opencv
+    lang: python3-custom
     handler: ./taxidriversafetyapp
     image: taxidriversafetyapp:latest
 
