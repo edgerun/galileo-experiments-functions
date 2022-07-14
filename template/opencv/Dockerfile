@@ -14,7 +14,6 @@ ARG ADDITIONAL_PACKAGE
 
 WORKDIR /home/app/
 
-COPY index.py           .
 COPY requirements.txt   .
 
 RUN mkdir -p /home/app/python
@@ -23,6 +22,8 @@ ENV PATH=$PATH:/home/app/.local/bin:/home/app/python/bin/
 ENV PYTHONPATH=$PYTHONPATH:/home/app/python
 
 RUN pip3 install -r requirements.txt --extra-index-url=https://www.piwheels.org/simple --target=/home/app/python
+
+COPY index.py           .
 
 RUN mkdir -p function
 RUN touch ./function/__init__.py

@@ -9,21 +9,25 @@ import numpy as np
 
 modelUrl = "./function/model/model.tflite"
 
-def handle(event, body):
+def handle(event, context):
     # load model
     start_time = time.time()
-    try:
-        base_options = core.BaseOptions(
-            file_name=modelUrl, use_coral=False, num_threads=4)
-        detection_options = processor.DetectionOptions(
-            max_results=3, score_threshold=0.3)
-        options = vision.ObjectDetectorOptions(
-            base_options=base_options, detection_options=detection_options)
-        detector = vision.ObjectDetector.create_from_options(options)
-    except Exception as e:
-        return returnBadRequest("Error while model loading: " + str(e))
+    with context.lock:
+        if context.model is None:
+            try:
+                base_options = core.BaseOptions(
+                    file_name=modelUrl, use_coral=False, num_threads=4)
+                detection_options = processor.DetectionOptions(
+                    max_results=3, score_threshold=0.3)
+                options = vision.ObjectDetectorOptions(
+                    base_options=base_options, detection_options=detection_options)
+                context.model = vision.ObjectDetector.create_from_options(options)
+            except Exception as e:
+                return returnBadRequest("Error while model loading: " + str(e))
     stop_time = time.time()
     model_load_time = stop_time - start_time
+
+    detector = context.model
 
     # preprocess
     start_time = time.time()

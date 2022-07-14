@@ -22,6 +22,7 @@ class Context:
     def __init__(self):
         self.lock = threading.Lock()
         self.hostname = os.getenv('HOSTNAME', 'localhost')
+        self.model = None
 
 
 def format_status_code(resp):
