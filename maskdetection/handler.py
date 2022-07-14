@@ -7,8 +7,8 @@ import numpy as np
 # based on https://github.com/danieldanuega/mask-detector
 
 def handle(event, context):
-    maskModel = "./function/model/detect.tflite"
-    pathLabels = "./function/model/labels.txt"
+    maskModel = "./function/model/maskdetection.tflite"
+    pathLabels = "./function/model/maskdetection.txt"
 
     with open(pathLabels, "r") as f:
         labels = [line.strip() for line in f.readlines()]

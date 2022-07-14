@@ -7,7 +7,7 @@ from tflite_support.task import processor
 from tflite_support.task import vision
 import numpy as np
 
-modelUrl = "./function/model/model.tflite"
+modelUrl = "./function/model/objectdetection.tflite"
 
 def handle(event, body):
     # load model

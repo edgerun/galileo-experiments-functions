@@ -1,7 +1,7 @@
 import time
 import cv2
 import numpy as np
-cascadeUrl = "./function/model/cascade.xml"
+cascadeUrl = "./function/model/gundetection.xml"
 
 #based on https://www.geeksforgeeks.org/gun-detection-using-python-opencv/
 

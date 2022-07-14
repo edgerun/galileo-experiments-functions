@@ -15,8 +15,8 @@ def handle(event, context):
                   ["LHip", "LKnee"], ["LKnee", "LAnkle"], ["Neck", "Nose"], ["Nose", "REye"],
                   ["REye", "REar"], ["Nose", "LEye"], ["LEye", "LEar"]]
 
-    protoFile = "./function/model/coco/deploy_coco.prototxt"
-    weightsFile = "./function/model/coco/pose_iter_440000.caffemodel"
+    protoFile = "./function/model/poseestimation.prototxt"
+    weightsFile = "./function/model/poseestimation.caffemodel"
     threshold = 0.05
 
     # load model
