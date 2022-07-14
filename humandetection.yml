@@ -6,5 +6,8 @@ functions:
   humandetection:
     lang: opencv
     handler: ./humandetection
-    image: humandetection:latest
+    image: humandetection:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
 

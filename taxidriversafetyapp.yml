@@ -6,5 +6,8 @@ functions:
   taxidriversafetyapp:
     lang: python3-custom
     handler: ./taxidriversafetyapp
-    image: taxidriversafetyapp:latest
+    image: taxidriversafetyapp:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
 

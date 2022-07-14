@@ -6,5 +6,8 @@ functions:
   maskdetection:
     lang: opencv
     handler: ./maskdetection
-    image: maskdetection:latest
+    image: maskdetection:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
 

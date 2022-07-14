@@ -6,5 +6,8 @@ functions:
   gundetection:
     lang: opencv
     handler: ./gundetection
-    image: gundetection:latest
+    image: gundetection:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
 
