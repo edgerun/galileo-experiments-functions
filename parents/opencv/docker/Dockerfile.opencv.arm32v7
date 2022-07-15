@@ -1,0 +1,5 @@
+ARG TFLITE_VERSION=2.1.0
+FROM edgerun/tflite:${TFLITE_VERSION}-arm32v7
+
+RUN apt install libjpeg62 cmake libgtk2.0-dev pkg-config libopencv-* -y
+RUN apt install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev ffmpeg libportaudio2 cmake  -y

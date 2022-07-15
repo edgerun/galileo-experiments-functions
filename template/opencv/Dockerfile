@@ -1,11 +1,10 @@
 ARG WATCHDOG_VERSION=1.0.0
-ARG TFLITE_VERSION=2.1.0
+ARG OPENCV_VERSION=2.1.0
 
 FROM edgerun/of-watchdog:$WATCHDOG_VERSION as watchdog
-FROM aicg4t1/tflite:$TFLITE_VERSION
+FROM pruellerpaul/opencv:$OPENCV_VERSION
 
 RUN apt update --allow-releaseinfo-change -y
-RUN apt install libjpeg62 cmake libgtk2.0-dev pkg-config libopencv-* -y
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
@@ -31,8 +30,6 @@ WORKDIR /home/app/function/
 COPY function/requirements.txt	.
 
 RUN pip3 install -r requirements.txt --extra-index-url=https://www.piwheels.org/simple --target=/home/app/python
-RUN apt install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev ffmpeg libportaudio2 cmake  -y
-RUN apt install libtiff5 libopenjp2-7 libxcb1 -y
 WORKDIR /home/app/
 
 
