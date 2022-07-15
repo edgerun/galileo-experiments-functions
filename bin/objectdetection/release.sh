@@ -15,6 +15,7 @@ tmp="$(mktemp)"
 
 # scaffold build folder
 sed "s/VERSION/$version/g" objectdetection.yml >"${tmp}"
+sh bin/download_models.sh
 faas-cli build --shrinkwrap -f "${tmp}"
 cd ./build/objectdetection || exit
 
