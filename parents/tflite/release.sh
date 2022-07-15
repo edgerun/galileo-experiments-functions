@@ -20,7 +20,7 @@ wait
 docker manifest create ${basetag} \
   --amend ${basetag}-amd64 \
   --amend ${basetag}-arm32v7 \
-  --amend ${basetag}-arm64
+  --amend ${basetag}-arm64v8
 
 docker manifest annotate ${basetag} ${basetag}-arm64v8 --os "linux" --arch "arm64" --variant "v8"
 docker manifest annotate ${basetag} ${basetag}-arm32v7 --os "linux" --arch "arm" --variant "v7"
