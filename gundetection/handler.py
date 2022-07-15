@@ -60,7 +60,6 @@ def handle(event, context):
             "model_load_time": model_load_time * 1000,
             "preprocess_time": preprocess_time * 1000,
             "predict_time": predict_time * 1000,
-            "results": str(gun),
             "gunExist": gun_exist
         }
     }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ARCH="${1:-amd64}"
 
-image=edgerun/objectdetection
+image=edgerun/gundetection
 version=$(git rev-parse --short HEAD)
 tflite_version=2.1.0
 basetag="${image}:${version}"
@@ -14,9 +14,9 @@ export DOCKER_CLI_EXPERIMENTAL=enabled
 tmp="$(mktemp)"
 
 # scaffold build folder
-sed "s/VERSION/$version/g" objectdetection.yml >"${tmp}"
+sed "s/VERSION/$version/g" gundetection.yml >"${tmp}"
 faas-cli build --shrinkwrap -f "${tmp}"
-cd ./build/objectdetection || exit
+cd ./build/gundetection || exit
 
 # build container
 echo "Build amd64"
