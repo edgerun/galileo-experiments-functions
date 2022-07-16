@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-image=edgerun/mobilenet-inference
-version=$(git rev-parse --short HEAD)
+REPOSITORY="${1:-edgerun}"
+VERSION="${2:-$(git rev-parse --short HEAD)}"
+
+image=$REPOSITORY/mobilenet-inference
+version=$VERSION
 tflite_version=2.1.0
 basetag="${image}:${version}"
 
