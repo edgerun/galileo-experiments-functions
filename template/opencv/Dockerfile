@@ -2,7 +2,7 @@ ARG WATCHDOG_VERSION=1.0.0
 ARG OPENCV_VERSION=2.1.0
 
 FROM edgerun/of-watchdog:$WATCHDOG_VERSION as watchdog
-FROM pruellerpaul/opencv:$OPENCV_VERSION
+FROM edgerun/opencv:$OPENCV_VERSION
 
 RUN apt update --allow-releaseinfo-change -y
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
