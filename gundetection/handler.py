@@ -1,3 +1,6 @@
+import base64
+import io
+import json
 import time
 import cv2
 import numpy as np
@@ -28,11 +31,12 @@ def handle(event, context):
         return returnBadRequest("Error while model loading: " + str(e))
     stop_time = time.time()
     model_load_time = stop_time - start_time
-
+    req = event.body
+    req = json.loads(req)
     # preprocess
     start_time = time.time()
     try:
-        nparr = np.fromstring(event.body, np.uint8)
+        nparr = np.fromstring(req['picture'], np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = image_resize(image, width=500)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
