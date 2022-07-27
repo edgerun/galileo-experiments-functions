@@ -28,7 +28,7 @@ def handle(event, context):
     # 2.1 return true (driver is safe)
     # 3. if human found
     # 3.1 call mask detection
-    # 3.2 call object detection
+    # 3.2 call gun detection
     # 4. return wear a mask && no weapon detected
 
     start_time = time.time()
