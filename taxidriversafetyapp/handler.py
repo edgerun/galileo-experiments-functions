@@ -1,11 +1,18 @@
+import base64
+import json
 import os
 import concurrent.futures
 import time
 
 import requests
-
 gateway_hostname = os.getenv("gateway_hostname", "gateway.openfaas")
 base_url = "http://" + gateway_hostname + ":8080/function/"
+
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
+
 def call_request(req, f):
     try:
         r = requests.get(base_url + f, data=req)
@@ -32,7 +39,9 @@ def handle(event, context):
     # 4. return wear a mask && no weapon detected
 
     start_time = time.time()
-    if not event.body:
+    req = event.body
+    req = json.loads(req)
+    if not req['picture']:
         return returnBadRequest("Error: No image.")
     # 1. call human detector
     r = call_request(event.body, "humandetection")

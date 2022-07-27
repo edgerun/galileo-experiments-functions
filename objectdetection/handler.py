@@ -1,3 +1,5 @@
+import base64
+import json
 import tempfile
 import time
 
@@ -9,7 +11,12 @@ import numpy as np
 
 modelUrl = "./function/model/objectdetection.tflite"
 
-def handle(event, body):
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
+
+def handle(event, context):
     # load model
     start_time = time.time()
     try:
@@ -28,8 +35,10 @@ def handle(event, body):
     # preprocess
     start_time = time.time()
     try:
+        req = event.body
+        req = json.loads(req)
         _, filename = tempfile.mkstemp(suffix=".jpg")
-        nparr = np.fromstring(event.body, np.uint8)
+        nparr = np.fromstring(get_image_from_request(req), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         input_tensor = vision.TensorImage.create_from_array(rgb_image)

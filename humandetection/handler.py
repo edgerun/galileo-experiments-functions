@@ -1,6 +1,13 @@
+import base64
+import json
 import time
 import cv2
 import numpy as np
+
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
 
 def handle(event, context):
     # load model
@@ -16,7 +23,9 @@ def handle(event, context):
     # preprocess image
     start_time = time.time()
     try:
-        im_arr = np.frombuffer(event.body, dtype=np.uint8)
+        req = event.body
+        req = json.loads(req)
+        im_arr = np.frombuffer(get_image_from_request(req), dtype=np.uint8)
         img = cv2.imdecode(im_arr, flags=cv2.IMREAD_COLOR)
         new_width = 900
         dsize = (new_width, img.shape[0])

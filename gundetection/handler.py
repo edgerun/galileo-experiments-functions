@@ -8,6 +8,11 @@ cascadeUrl = "./function/model/gundetection.xml"
 
 #based on https://www.geeksforgeeks.org/gun-detection-using-python-opencv/
 
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
+
 def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
@@ -31,12 +36,13 @@ def handle(event, context):
         return returnBadRequest("Error while model loading: " + str(e))
     stop_time = time.time()
     model_load_time = stop_time - start_time
-    req = event.body
-    req = json.loads(req)
+
     # preprocess
     start_time = time.time()
     try:
-        nparr = np.fromstring(req['picture'], np.uint8)
+        req = event.body
+        req = json.loads(req)
+        nparr = np.fromstring(get_image_from_request(req), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = image_resize(image, width=500)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
