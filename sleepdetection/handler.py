@@ -1,9 +1,17 @@
+import base64
+import json
+
 import numpy as np
 import imutils
 import time
 import dlib
 import cv2
 from math import hypot
+
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
 
 def mid(p1 ,p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
@@ -41,7 +49,7 @@ def handle(event, context):
 
     modelUrl = "./function/model/68facelandmarks.dat"
 
-    # load model and image
+    # load model
     start_time = time.time()
     try:
         detector = dlib.get_frontal_face_detector()
@@ -54,7 +62,9 @@ def handle(event, context):
     # preprocess
     start_time = time.time()
     try:
-        im_arr = np.frombuffer(event.body, dtype=np.uint8)
+        req = event.body
+        req = json.loads(req)
+        im_arr = np.frombuffer(get_image_from_request(req), dtype=np.uint8)
         frame = cv2.imdecode(im_arr, flags=cv2.IMREAD_COLOR)
         frame = imutils.resize(frame, width=992)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

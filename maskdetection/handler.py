@@ -1,3 +1,5 @@
+import base64
+import json
 import time
 
 from tflite_runtime.interpreter import Interpreter
@@ -5,6 +7,11 @@ import cv2
 import numpy as np
 
 # based on https://github.com/danieldanuega/mask-detector
+
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
 
 def handle(event, context):
     maskModel = "./function/model/maskdetection.tflite"
@@ -33,7 +40,9 @@ def handle(event, context):
     # preprocess image
     start_time = time.time()
     try:
-        nparr = np.frombuffer(event.body, np.uint8)
+        req = event.body
+        req = json.loads(req)
+        nparr = np.frombuffer(get_image_from_request(req), np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         frame_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         frame_resized = cv2.resize(frame_rgb, (width, height))

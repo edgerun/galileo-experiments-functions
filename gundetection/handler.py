@@ -1,9 +1,17 @@
+import base64
+import io
+import json
 import time
 import cv2
 import numpy as np
 cascadeUrl = "./function/model/gundetection.xml"
 
 #based on https://www.geeksforgeeks.org/gun-detection-using-python-opencv/
+
+def get_image_from_request(req):
+    data = req['picture']
+    img_bytes = base64.b64decode(data)
+    return img_bytes
 
 def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     dim = None
@@ -32,7 +40,9 @@ def handle(event, context):
     # preprocess
     start_time = time.time()
     try:
-        nparr = np.fromstring(event.body, np.uint8)
+        req = event.body
+        req = json.loads(req)
+        nparr = np.fromstring(get_image_from_request(req), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = image_resize(image, width=500)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
