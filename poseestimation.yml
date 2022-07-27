@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  poseestimation:
+    lang: opencv
+    handler: ./poseestimation
+    image: poseestimation:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s

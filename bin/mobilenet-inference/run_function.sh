@@ -1,0 +1,2 @@
+arch=arm64v8
+docker run --rm -v "$(pwd)"/model.tflite:/model.tflite:ro -v "$(pwd)"/labels.txt:/labels.txt:ro --name mobilenet-inference  --env-file=mobilenet.env --network host edgerun/mobilenet-inference:1.1-${arch}

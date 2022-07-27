@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  sleepdetection:
+    lang: opencv
+    handler: ./sleepdetection
+    image: sleepdetection:VERSION
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
+

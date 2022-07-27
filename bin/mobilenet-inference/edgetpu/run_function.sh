@@ -1,0 +1,1 @@
+docker run --privileged -v --device /dev/apex_0:/dev/apex_0 --rm -v "$(pwd)"/model.tflite:/model.tflite:ro -v "$(pwd)"/labels.txt:/labels.txt:ro --name mobilenet-inference  --env-file=mobilenet.env --network host edgerun/mobilenet-inference:1.1-arm64v8
