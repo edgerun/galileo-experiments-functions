@@ -3,3 +3,4 @@ venv
 .idea
 model
 mobilenet-inference/data
+template
