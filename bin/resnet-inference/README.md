@@ -12,7 +12,7 @@ Build and release:
 
 Manually start the docker container:
 
-    docker run -e SET_GPU_MEMORY_LIMIT=false -e MODEL_STORAGE='local' -e IMAGE_STORAGE='request' -e exec_timeout=5m -d resi5/resnet-inference:<tagname>
+    docker run -e SET_GPU_MEMORY_LIMIT=false -e MODEL_STORAGE='local' -e IMAGE_STORAGE='request' -e exec_timeout=5m -e read_timeout=5m -e write_timeout=5m -d resi5/resnet-inference:<tagname>
 
 Get a bash shell inside the running container:
  
@@ -20,4 +20,8 @@ Get a bash shell inside the running container:
 
 Curl command for testing the function (run within container shell): 
 
-    curl -d "@data.json" -L -X POST http://localhost:8080
+    curl -d "@data.json" -X POST http://localhost:8080
+
+Whereby the data.json File should look like this:
+
+    {"picture": "<base64 encdoed string of image>"}
