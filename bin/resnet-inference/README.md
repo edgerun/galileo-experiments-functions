@@ -1,13 +1,14 @@
 #Usage
 
-Build images:
+Build images (from root directory):
 
-    ./build.sh
+    ./bin/resnet-inference/build.sh
+    ./bin/resnet-inference/build.sh arm64v8
     
 
-Build and release:
+Build and release (from root directory):
 
-    ./release.sh
+    ./bin/resnet-inference/release.sh
 
 
 Manually start the docker container:
