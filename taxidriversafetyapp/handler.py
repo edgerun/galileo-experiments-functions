@@ -5,7 +5,7 @@ import concurrent.futures
 import time
 
 import requests
-gateway_hostname = os.getenv("gateway_hostname", "gateway.openfaas")
+gateway_hostname = os.getenv("API_GATEWAY", "gateway.openfaas")
 base_url = "http://" + gateway_hostname + ":8080/function/"
 
 def get_image_from_request(req):
