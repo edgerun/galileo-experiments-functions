@@ -10,8 +10,8 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from minio import Minio, ResponseError
-from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.applications.efficientnet import EfficientNetB0
+from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras.preprocessing import image
 from tensorflow.python.keras.utils import data_utils
 
@@ -69,7 +69,7 @@ def load_model(context, folder: str = None):
             with open(index_file) as fd:
                 context.class_index = json.load(fd)
 
-            context.model = ResNet50(weights=weights)
+            context.model = EfficientNetB0(weights=weights)
 
 
 # copied from source: imagenet_utils.py

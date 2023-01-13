@@ -4,4 +4,5 @@ venv
 model
 resnet-inference/data
 mobilenet-inference/data
+efficientnet-inference/data
 template

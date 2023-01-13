@@ -20,6 +20,9 @@ cd ..
 cd ./resnet-inference
 mkdir data
 cd ..
+cd ./efficientnet-inference
+mkdir data
+cd ..
 
 #download model for poseestimation
 wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=149EikDB4v38tIFRBj0eznq5u1FPjFBEe' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=149EikDB4v38tIFRBj0eznq5u1FPjFBEe" -O ./poseestimation/model/poseestimation.caffemodel && rm -rf /tmp/cookies.txt
@@ -47,3 +50,8 @@ wget https://raw.githubusercontent.com/google-coral/edgetpu/master/test_data/ima
 #download model for resnet-inference
 wget https://github.com/keras-team/keras-applications/releases/download/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5 -O ./resnet-inference/data/model.h5
 wget https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json -O ./resnet-inference/data/labels.json
+
+#download model for efficientnet-inference
+#wget https://github.com/leondgarse/keras_efficientnet_v2/releases/download/effnetv2_pretrained/efficientnetv2-b0-imagenet.h5 -O ./efficientnet-inference/data/model.h5
+wget https://github.com/leondgarse/keras_efficientnet_v2/releases/download/effnetv1_pretrained/efficientnetv1-b0-imagenet.h5 -O ./efficientnet-inference/data/model.h5
+wget https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json -O ./efficientnet-inference/data/labels.json
