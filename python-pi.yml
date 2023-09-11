@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  python-pi:
+    lang: python3-custom
+    handler: ./python-pi
+    image: python-pi:VERSION
+
